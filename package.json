@@ -1,0 +1,27 @@
+{
+  "name": "tenable-nessus-ui-kata",
+  "version": "1.0.0",
+  "description": "Tenable's Nessus UI assignemnt kata",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjugger/tenable-nessus-ui-kata.git"
+  },
+  "author": "Mukhtar Jugger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjugger/tenable-nessus-ui-kata/issues"
+  },
+  "homepage": "https://github.com/mjugger/tenable-nessus-ui-kata#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "jade": "^1.11.0",
+    "stylus": "^0.54.5"
+  }
+}
