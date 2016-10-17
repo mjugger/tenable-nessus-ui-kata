@@ -10,7 +10,7 @@ gulp.task('bdd-test',function(done){
 	new karmaServer({
 		configFile:"./karma.config.js",
 		singleRun:false
-	},done);
+	},done).start();
 });
 
 gulp.task('bowerStyles',function(){
@@ -18,7 +18,7 @@ gulp.task('bowerStyles',function(){
 	.pipe( mainBowerFiles('**/*.css') )
 	.pipe( concat('helperStyles.css') )
 	.pipe( cleanMinify() )
-	.pipe( gulp.dest('build/css') );
+	.pipe( gulp.dest('public/css') );
 });
 
 gulp.task('scripts',function(){
@@ -33,4 +33,4 @@ gulp.task('watch',function(){
 	gulp.watch('source/scripts/*.js',['scripts']);
 });
 
-gulp.task('default',['bowerStyles','scripts','watch']);
+gulp.task('default',['bowerStyles','scripts','bdd-test','watch']);
