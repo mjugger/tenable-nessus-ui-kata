@@ -1,9 +1,22 @@
 var express = require('express')();
 var path = require('path');
 var faker = require('faker');
-var fakeDatabase = [];
+var fakeDatabase = [
+	{
+		name:'host1',
+		hostname:'nessus-ntp.lab.com',
+		port:1241,
+		username:'toto'
+	},
+	{
+		name:'host2',
+		hostname:'nessus-xml.lab.com',
+		port:3384,
+		username:'admin'
+	}
+];
 
-(function generateFakeDB(dbSize){
+function generateFakeDB(dbSize){
 	for (var i = 0; i < dbSize; i++) {
 		fakeDatabase.push({
 			name:faker.name.findName(),
@@ -12,7 +25,8 @@ var fakeDatabase = [];
 			username:faker.internet.userName()
 		});
 	};
-})(10000);
+};
+
 
 express.set('views', path.join(__dirname, 'views'));
 express.set('view engine', 'jade');
@@ -22,5 +36,6 @@ express.get('/download/request',function(req,res){
 });
 
 express.listen(3005,function(){
+	generateFakeDB(10000);
 	console.log('express server listening on port: ',this.address().port);
 });
