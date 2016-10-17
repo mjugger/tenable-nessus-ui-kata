@@ -4,7 +4,14 @@ var cleanMinify = require('gulp-clean-css');
 var stylus = require('gulp-stylus');
 var mainBowerFiles = require('gulp-main-bower-files');
 var uglify = require('gulp-uglify');
+var karmaServer = require('karma').Server;
 
+gulp.task('bdd-test',function(done){
+	new karmaServer({
+		configFile:"./karma.config.js",
+		singleRun:false
+	},done);
+});
 
 gulp.task('bowerStyles',function(){
 	return gulp.src('bower.json')
