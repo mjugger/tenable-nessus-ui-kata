@@ -27,15 +27,22 @@ function generateFakeDB(dbSize){
 	};
 };
 
+function requestDBRecords(amount){
+	if(amount){
+		return fakeDatabase.slice(0,amount);
+	}else{
+		return [];
+	}
+}
 
 express.set('views', path.join(__dirname, 'views'));
 express.set('view engine', 'jade');
 
 express.get('/download/request',function(req,res){
-	res.status(200).json({configurations:fakeDatabase});
+	res.status(200).json({configurations:requestDBRecords(req.query.host)});
 });
 
 express.listen(3005,function(){
-	generateFakeDB(10000);
+	generateFakeDB(9998);
 	console.log('express server listening on port: ',this.address().port);
 });
