@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/mjugger/tenable-nessus-ui-kata#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "faker": "^3.1.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
