@@ -4,12 +4,21 @@ var cleanMinify = require('gulp-clean-css');
 var stylus = require('gulp-stylus');
 var mainBowerFiles = require('gulp-main-bower-files');
 var uglify = require('gulp-uglify');
+var jade = require('gulp-jade');
+var htmlMinify = require('gulp-htmlmin');
 var karmaServer = require('karma').Server;
 
 gulp.task('bdd-test',function(done){
 	new karmaServer({
 		configFile:__dirname+"/karma.config.js",
 	},done).start();
+});
+
+gulp.task('jadeToHTML',function(){
+	return gulp.src(['!source/views/layout.jade','source/views/*.jade'])
+	.pipe( jade() )
+	.pipe( htmlMinify() )
+	.pipe( gulp.dest('public') );
 });
 
 gulp.task('bowerStyles',function(){
@@ -43,8 +52,9 @@ gulp.task('scripts',function(){
 });
 
 gulp.task('watch',function(){
+	gulp.watch('source/*.jade',['jadeToHTML']);
 	gulp.watch('source/styles/*.styl',['styles']);
 	gulp.watch('source/scripts/*.js',['scripts']);
 });
 
-gulp.task('default',['bowerStyles','bowerScripts','styles','scripts','bdd-test','watch']);
+gulp.task('default',['jadeToHTML','bowerStyles','bowerScripts','styles','scripts','bdd-test','watch']);
