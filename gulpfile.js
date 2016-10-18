@@ -8,8 +8,7 @@ var karmaServer = require('karma').Server;
 
 gulp.task('bdd-test',function(done){
 	new karmaServer({
-		configFile:"./karma.config.js",
-		singleRun:false
+		configFile:__dirname+"/karma.config.js",
 	},done).start();
 });
 
@@ -17,6 +16,21 @@ gulp.task('bowerStyles',function(){
 	return gulp.src('bower.json')
 	.pipe( mainBowerFiles('**/*.css') )
 	.pipe( concat('helperStyles.css') )
+	.pipe( cleanMinify() )
+	.pipe( gulp.dest('public/css') );
+});
+
+gulp.task('bowerScripts',function(){
+	return gulp.src('bower.json')
+		.pipe(mainBowerFiles('**/*.js'))
+		.pipe(concat('helper.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('public/scripts'));
+});
+
+gulp.task('styles',function(){
+	return gulp.src('source/styles/styles.styl')
+	.pipe( stylus() )
 	.pipe( cleanMinify() )
 	.pipe( gulp.dest('public/css') );
 });
@@ -29,8 +43,8 @@ gulp.task('scripts',function(){
 });
 
 gulp.task('watch',function(){
-	gulp.watch('source/styles/*.styl',['bowerStyles']);
+	gulp.watch('source/styles/*.styl',['styles']);
 	gulp.watch('source/scripts/*.js',['scripts']);
 });
 
-gulp.task('default',['bowerStyles','scripts','bdd-test','watch']);
+gulp.task('default',['bowerStyles','bowerScripts','styles','scripts','bdd-test','watch']);
