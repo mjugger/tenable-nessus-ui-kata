@@ -1,6 +1,7 @@
-var express = require('express')();
+var express = require('express');
 var path = require('path');
 var faker = require('faker');
+var app = express();
 var fakeDatabase = [
 	{
 		name:'host1',
@@ -35,13 +36,17 @@ function requestDBRecords(amount){
 	}
 }
 
-express.use(express.static('public'));
+app.use(express.static('public'));
 
-express.get('/download/request',function(req,res){
+app.get('/',function(req,res){
+	res.status(200).json({message:"no page"});
+});
+
+app.get('/download/request',function(req,res){
 	res.status(200).json({configurations:requestDBRecords(req.query.host)});
 });
 
-express.listen(3005,function(){
+app.listen(3005,function(){
 	generateFakeDB(9998);
 	console.log('express server listening on port: ',this.address().port);
 });
