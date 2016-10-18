@@ -35,8 +35,7 @@ function requestDBRecords(amount){
 	}
 }
 
-express.set('views', path.join(__dirname, 'views'));
-express.set('view engine', 'jade');
+express.use(express.static('public'));
 
 express.get('/download/request',function(req,res){
 	res.status(200).json({configurations:requestDBRecords(req.query.host)});
