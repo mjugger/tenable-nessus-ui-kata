@@ -1,0 +1,21 @@
+{
+  "name": "tenable-nessus-ui-kata",
+  "description": "Tenable's Nessus UI assignemnt kata",
+  "main": "index.js",
+  "authors": [
+    "Mukhtar Jugger"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/mjugger/tenable-nessus-ui-kata",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "material-design-lite": "^1.2.1"
+  }
+}
