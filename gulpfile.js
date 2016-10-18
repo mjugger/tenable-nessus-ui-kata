@@ -34,7 +34,7 @@ gulp.task('bowerScripts',function(){
 		.pipe(mainBowerFiles('**/*.js'))
 		.pipe(concat('helper.min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('public/scripts'));
+		.pipe(gulp.dest('public/js'));
 });
 
 gulp.task('styles',function(){
@@ -52,7 +52,7 @@ gulp.task('scripts',function(){
 });
 
 gulp.task('watch',function(){
-	gulp.watch('source/*.jade',['jadeToHTML']);
+	gulp.watch('source/views/*.jade',['jadeToHTML']);
 	gulp.watch('source/styles/*.styl',['styles']);
 	gulp.watch('source/scripts/*.js',['scripts']);
 });
