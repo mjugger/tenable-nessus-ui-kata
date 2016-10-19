@@ -1,6 +1,6 @@
 (function(){
 	'use strict'
-	function Constructor(perPageLimit,url,recordAmount,pageSelectionID,injectionContainerID){
+	function Constructor(perPageLimit,url,recordAmount,pageSelectionID,injectionContainerID,searchFormID,searchFieldID){
 		if(!(this instanceof Constructor) ){
 			throw "pagination.js must be constructed with \"new\" keyword";
 		}
@@ -9,6 +9,8 @@
 		this.recordAmount = recordAmount;
 		this.pageSelector = document.querySelector(pageSelectionID);
 		this.injectionContainer = document.querySelector(injectionContainerID);
+		this.searchForm = document.querySelector(searchFormID);
+		this.searchField = document.querySelector(searchFieldID);
 		this.pageCount = null;
 		this.data = null;
 	}
@@ -19,9 +21,22 @@
 			me.data = data.configurations;
 			me.pageCount = me.calculateTotalPages(me.data);
 			me.setUpPageSelector();
+			me.setUpSearch();
 			me.setUpPageContent(0);
-			console.log('data: ',me.data,' pagecount: ',me.pageCount);
 		});
+	}
+
+	Constructor.prototype.setUpSearch = function(){
+		if(this.searchForm && searchField){
+			var me = this;
+			this.searchForm.addEventListener('submit',function(e){
+				e.preventDefault();
+				var results = me.getSearchData(me.searchField.value);
+				var DOMElements = me.createPageElements(results);
+				me.removePageContent();
+				me.addPageContent(DOMElements);
+			});
+		}
 	}
 
 	Constructor.prototype.setUpPageSelector = function(){
@@ -39,7 +54,9 @@
 		if(this.injectionContainer.hasChildNodes){
 			this.removePageContent();
 		}
-		this.addPageContent(pageNumber);
+		var pageData = this.getPageData(pageNumber);
+		var DOMElements = this.createPageElements(pageData);
+		this.addPageContent(DOMElements);
 	}
 
 	Constructor.prototype.removePageContent = function(){
@@ -48,9 +65,8 @@
 		}
 	}
 
-	Constructor.prototype.addPageContent = function(pageNumber){
-		var pageData = this.getPageData(pageNumber);
-		this.injectionContainer.appendChild(this.createPageElements(pageData));
+	Constructor.prototype.addPageContent = function(pageContent){
+		this.injectionContainer.appendChild(pageContent);
 	}
 
 	Constructor.prototype.fetchData = function(callback){
@@ -87,6 +103,25 @@
 		var startingIndex = (pageToReturn * this.perPageLimit);
 		var endingIndex = startingIndex + this.perPageLimit;
 		return this.data.slice(startingIndex,endingIndex);
+	}
+
+	Constructor.prototype.getSearchData = function(searchTerm){
+		var results = [];
+		var match;
+		var searchRegEx = new RegExp(searchTerm,'gi');
+		for (var i = 0; i < this.data.length; i++) {
+			match = null;
+			for(var key in this.data[i]){
+				if( searchRegEx.test(this.data[i][key].toString()) ){
+					match = this.data[i];
+					break;
+				}
+			}
+			if(match){
+				results.push(match);
+			}
+		};
+		return results;
 	}
 
 	Constructor.prototype.createPageSelections = function(numberOfPages){

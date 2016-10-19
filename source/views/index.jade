@@ -18,4 +18,8 @@ block content
 					div.mdl-grid.center-grid
 						div.mdl-cell.mdl-cell--12-col
 							select#pageNumbers.pageSelector
+							form#searchForm(method="get")
+								div.fullWidthField.mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+									input.mdl-textfield__input(type="text" id="searchField")
+									label.mdl-textfield__label(for="searchField") Search...
 						div#tab2Container.mdl-cell.mdl-cell--12-col
