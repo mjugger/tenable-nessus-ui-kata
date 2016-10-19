@@ -168,7 +168,7 @@
 	Constructor.prototype.getSearchData = function(searchTerm){
 		var results = [];
 		var match;
-		var searchRegEx = new RegExp(searchTerm,'gi');
+		var searchRegEx = new RegExp(searchTerm,'i');
 		for (var i = 0; i < this.data.length; i++) {
 			match = null;
 			for(var key in this.data[i]){
