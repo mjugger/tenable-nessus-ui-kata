@@ -49,7 +49,6 @@ describe('pagination',function(){
 	describe('getSearchData fn',function(){
 		it('should return the record at the 3rd index when searching for name vincent',function(){
 			var results = testPagination.getSearchData('vincent');
-			console.log(results);
 			expect(results[0].name).toBe(testPagination.data[3].name);
 		});
 
