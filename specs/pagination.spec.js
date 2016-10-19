@@ -26,9 +26,13 @@ describe('pagination',function(){
 		});
 	});
 
-	describe('createPageElements fn',function(){
-		it('should create elements with the data from getPageData injected into them',function(){
+	describe('isOdd fn',function(){
+		it('should return true if number is odd',function(){
+			expect(testPagination.isOdd(5)).toBe(true);
+		});
 
+		it('should return false if number is even',function(){
+			expect(testPagination.isOdd(8)).toBe(false);
 		});
 	});
 

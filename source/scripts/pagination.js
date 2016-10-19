@@ -70,6 +70,10 @@
 		return Boolean(num%1);
 	}
 
+	Constructor.prototype.isOdd = function(number){
+		return Boolean(number%2);
+	}
+
 	Constructor.prototype.calculateTotalPages = function(dataArray){
 		var recordCount = dataArray.length;
 		var pageCount = recordCount / this.perPageLimit;
@@ -88,7 +92,8 @@
 	Constructor.prototype.createPageSelections = function(numberOfPages){
 		var docFrag = document.createDocumentFragment();
 		var selectEl;
-		for (var i = 0; i <= numberOfPages; i++) {
+		numberOfPages = this.isOdd(numberOfPages) ? numberOfPages+1 : numberOfPages;
+		for (var i = 0; i < numberOfPages; i++) {
 			selectEl = document.createElement('option');
 			selectEl.textContent = 'page: '+(i+1);
 			docFrag.appendChild(selectEl);
