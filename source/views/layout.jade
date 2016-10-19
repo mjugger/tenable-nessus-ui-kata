@@ -10,3 +10,6 @@ html
 		block content
 	script(src='js/helper.min.js')
 	script(src='js/all.min.js')
+	script.
+		new pagination(20,'/download/request?host=',2,null,'#tab1Container').create();
+		new pagination(20,'/download/request?host=',2005,'#pageNumbers','#tab2Container').create();
