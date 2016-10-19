@@ -107,7 +107,7 @@
 			title = document.createElement('div');
 			h2 = document.createElement('h2');
 			cardBody = document.createElement('div');
-			container.className = 'mdl-card mdl-shadow--4dp';
+			container.className = 'mdl-card mdl-shadow--4dp custom-card-styles';
 			title.className = 'mdl-card__title';
 			h2.className = 'mdl-card__title-text';
 			cardBody.className = 'mdl-card__supporting-text';
