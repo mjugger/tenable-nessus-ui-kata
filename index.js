@@ -46,7 +46,7 @@ app.get('/download/request',function(req,res){
 	res.status(200).json({configurations:requestDBRecords(req.query.host)});
 });
 
-app.listen(3005,function(){
+app.listen(3002,function(){
 	generateFakeDB(9998);
 	console.log('express server listening on port: ',this.address().port);
 });
